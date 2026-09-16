@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: gourmet_reserve_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: gourmet_reserve
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - gourmet_reserve_data:/var/lib/postgresql/data
+
+  # Веб-интерфейс для просмотра БД в браузере (необязательно).
+  # Открыть: http://localhost:8080  (сервер: postgres, логин: postgres, пароль: postgres, БД: gourmet_reserve)
+  adminer:
+    image: adminer
+    container_name: gourmet_reserve_adminer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+volumes:
+  gourmet_reserve_data:

@@ -1,0 +1,95 @@
+/* booking.css — стили карты зала для страницы бронирования */
+
+.restaurant-floor {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 90px);
+    gap: 12px;
+    max-width: 700px;
+    padding: 20px;
+    background-color: #f5f1eb;
+    border: 1px solid #ddd6c8;
+    border-radius: 12px;
+}
+
+.table-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    border: 2px solid #6c8f79;
+    background-color: #ffffff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+    padding: 6px;
+    font-size: 0.8rem;
+    color: #333;
+}
+
+.table-item:hover:not(:disabled) {
+    background-color: #eaf3ec;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-icon {
+    font-size: 1.4rem;
+}
+
+.table-label {
+    font-weight: 600;
+}
+
+.table-capacity {
+    font-size: 0.7rem;
+    color: #666;
+}
+
+/* Занятый / недоступный стол */
+.table-item:disabled,
+.table-item.table-item--busy {
+    background-color: #f1e0e0;
+    border-color: #c96b6b;
+    color: #a44;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Выбранный стол */
+.table-item.selected {
+    background-color: #d7ecff;
+    border-color: #2f7bd6;
+    box-shadow: 0 0 0 3px rgba(47, 123, 214, 0.25);
+}
+
+/* Легенда */
+.legend {
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.legend-swatch {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
+.legend-free {
+    background-color: #ffffff;
+    border: 2px solid #6c8f79;
+}
+
+.legend-selected {
+    background-color: #d7ecff;
+    border: 2px solid #2f7bd6;
+}
+
+.legend-busy {
+    background-color: #f1e0e0;
+    border: 2px solid #c96b6b;
+}

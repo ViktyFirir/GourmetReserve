@@ -1,0 +1,51 @@
+@model HomeIndexViewModel
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<div class="p-5 mb-4 bg-dark text-white rounded-3 text-center">
+    <h1 class="display-5 fw-bold">GourmetReserve</h1>
+    <p class="col-md-8 mx-auto fs-5">
+        Авторская кухня, уютная атмосфера и столик, забронированный за пару кликов.
+    </p>
+    <a class="btn btn-lg btn-outline-light" asp-controller="Booking" asp-action="Index">
+        Забронировать стол
+    </a>
+</div>
+
+<h2 class="h4 mb-3">Новости</h2>
+<div class="row g-3 mb-5">
+    @if (!Model.LatestNews.Any())
+    {
+        <p class="text-muted">Пока нет опубликованных новостей.</p>
+    }
+    @foreach (var news in Model.LatestNews)
+    {
+        <div class="col-md-4">
+            <div class="card card-news p-3 h-100">
+                <h5 class="card-title">@news.Title</h5>
+                <p class="text-muted small">@news.PublishedAt.ToString("dd.MM.yyyy")</p>
+                <p class="card-text">@news.ShortDescription</p>
+            </div>
+        </div>
+    }
+</div>
+
+<h2 class="h4 mb-3">Выбор шефа</h2>
+<div class="row g-3">
+    @if (!Model.ChefChoiceDishes.Any())
+    {
+        <p class="text-muted">Пока нет блюд с пометкой «Выбор шефа».</p>
+    }
+    @foreach (var dish in Model.ChefChoiceDishes)
+    {
+        <div class="col-md-4">
+            <div class="card card-dish p-3 h-100">
+                <span class="badge badge-chef text-white mb-2 align-self-start">Выбор шефа</span>
+                <h5 class="card-title">@dish.Name</h5>
+                <p class="card-text text-muted small">@dish.Description</p>
+                <p class="fw-bold mt-auto">@dish.Price.ToString("N0") ₽ @(dish.WeightOrVolume != null ? $"· {dish.WeightOrVolume}" : "")</p>
+            </div>
+        </div>
+    }
+</div>

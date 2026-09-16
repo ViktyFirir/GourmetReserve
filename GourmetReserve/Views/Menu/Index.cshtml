@@ -1,0 +1,51 @@
+@model List<MenuCategory>
+@{
+    ViewData["Title"] = "Меню";
+}
+
+<h1 class="mb-4">Меню</h1>
+
+@foreach (var category in Model)
+{
+    <h2 class="h4 menu-category-title">
+        @if (!string.IsNullOrEmpty(category.IconCssClass))
+        {
+            <i class="@category.IconCssClass"></i>
+        }
+        @category.Name
+    </h2>
+
+    <div class="row g-3 mb-4">
+        @if (category.MenuItems == null || !category.MenuItems.Any())
+        {
+            <p class="text-muted">В этой категории пока нет блюд.</p>
+        }
+        @foreach (var item in category.MenuItems ?? new List<MenuItem>())
+        {
+            <div class="col-md-4">
+                <div class="card card-dish p-3 h-100">
+                    <div class="d-flex gap-1 mb-2">
+                        @if (item.IsChefChoice)
+                        {
+                            <span class="badge badge-chef text-white">Шеф</span>
+                        }
+                        @if (item.IsSpicy)
+                        {
+                            <span class="badge badge-spicy text-white">Острое</span>
+                        }
+                        @if (item.IsVegetarian)
+                        {
+                            <span class="badge badge-veg text-white">Вег.</span>
+                        }
+                    </div>
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text text-muted small">@item.Description</p>
+                    <div class="d-flex justify-content-between mt-auto">
+                        <span class="text-muted small">@item.WeightOrVolume</span>
+                        <span class="fw-bold">@item.Price.ToString("N0") ₽</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

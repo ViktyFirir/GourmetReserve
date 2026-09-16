@@ -1,0 +1,43 @@
+@model List<NewsItem>
+@{
+    ViewData["Title"] = "Управление новостями";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Новости</h1>
+    <a class="btn btn-dark" asp-action="CreateNewsItem">+ Добавить новость</a>
+</div>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<table class="table table-striped align-middle">
+    <thead>
+        <tr>
+            <th>Заголовок</th>
+            <th>Дата публикации</th>
+            <th>Актуально</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var news in Model)
+        {
+            <tr>
+                <td>@news.Title</td>
+                <td>@news.PublishedAt.ToString("dd.MM.yyyy")</td>
+                <td>@(news.IsActive ? "Да" : "Нет")</td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-outline-secondary" asp-action="EditNewsItem" asp-route-id="@news.Id">Изменить</a>
+                    <form asp-action="DeleteNewsItem" asp-route-id="@news.Id" method="post" class="d-inline"
+                          onsubmit="return confirm('Удалить эту новость?');">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

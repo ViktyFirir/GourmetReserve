@@ -1,0 +1,15 @@
+@model MenuItem
+@{
+    ViewData["Title"] = "Редактирование блюда";
+}
+
+<h1 class="h3 mb-4">Редактирование блюда</h1>
+
+<form asp-action="EditMenuItem" asp-route-id="@Model.Id" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+    @await Html.PartialAsync("_MenuItemFormFields")
+    <button type="submit" class="btn btn-dark">Сохранить</button>
+    <a asp-action="MenuItems" class="btn btn-outline-secondary">Отмена</a>
+</form>

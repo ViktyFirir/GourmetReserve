@@ -1,0 +1,49 @@
+@model List<MenuItem>
+@{
+    ViewData["Title"] = "Управление меню";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Меню</h1>
+    <a class="btn btn-dark" asp-action="CreateMenuItem">+ Добавить блюдо</a>
+</div>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<table class="table table-striped align-middle">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Категория</th>
+            <th>Цена</th>
+            <th>Метки</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.MenuCategory?.Name</td>
+                <td>@item.Price.ToString("N0") ₽</td>
+                <td>
+                    @if (item.IsChefChoice) { <span class="badge badge-chef text-white">Шеф</span> }
+                    @if (item.IsSpicy) { <span class="badge badge-spicy text-white">Острое</span> }
+                    @if (item.IsVegetarian) { <span class="badge badge-veg text-white">Вег.</span> }
+                </td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-outline-secondary" asp-action="EditMenuItem" asp-route-id="@item.Id">Изменить</a>
+                    <form asp-action="DeleteMenuItem" asp-route-id="@item.Id" method="post" class="d-inline"
+                          onsubmit="return confirm('Удалить это блюдо?');">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,14 @@
+@model NewsItem
+@{
+    ViewData["Title"] = "Новая новость";
+}
+
+<h1 class="h3 mb-4">Новая новость</h1>
+
+<form asp-action="CreateNewsItem" method="post">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+    @await Html.PartialAsync("_NewsItemFormFields")
+    <button type="submit" class="btn btn-dark">Опубликовать</button>
+    <a asp-action="NewsItems" class="btn btn-outline-secondary">Отмена</a>
+</form>
