@@ -5,44 +5,7 @@
 (`Reservations`), хранятся в PostgreSQL через `ApplicationDbContext` — отдельного
 хранилища для броней нет, это одна из таблиц той же базы.
 
-## Структура
-GourmetReserve/
-├── Models/
-│   ├── Table.cs
-│   ├── Reservation.cs
-│   ├── MenuCategory.cs
-│   ├── MenuItem.cs
-│   ├── NewsItem.cs
-│   ├── BookingViewModel.cs
-│   ├── LoginViewModel.cs
-│   └── AdminCredentialsOptions.cs
-├── Data/
-│   ├── ApplicationDbContext.cs
-│   └── DbInitializer.cs
-├── Controllers/
-│   ├── HomeController.cs
-│   ├── MenuController.cs
-│   ├── BookingController.cs
-│   ├── AccountController.cs
-│   └── AdminController.cs
-├── Views/
-│   ├── Shared/_Layout.cshtml
-│   ├── Home/Index.cshtml
-│   ├── Menu/Index.cshtml
-│   ├── Booking/Index.cshtml
-│   ├── Account/Login.cshtml
-│   ├── Admin/ (Index, MenuItems, NewsItems, Create*/Edit* + partial формы)
-│   ├── _ViewImports.cshtml
-│   └── _ViewStart.cshtml
-├── wwwroot/
-│   ├── css/site.css
-│   ├── css/booking.css
-│   └── js/booking.js
-├── tools/GenerateAdminHash.csx
-├── docker-compose.yml
-├── Program.cs
-├── appsettings.json
-└── GourmetReserve.csproj
+
 
 ## Запуск за 3 шага
 
